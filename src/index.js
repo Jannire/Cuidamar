@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import Home from './components/homepage';
+import Perfil from './components/perfil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={ <Home/> }/>
+        <Route path="/Perfil" element={ <Perfil/> } />
+      </Routes>
+    </HashRouter>
+    
   </React.StrictMode>
 );
 

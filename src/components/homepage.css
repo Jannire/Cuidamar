@@ -1,0 +1,19 @@
+:root {
+    --blue: #6495ed;
+    --white: #faf0e6;
+}
+
+body{
+    background-color: var(--blue);
+}
+
+
+.perfilIcon{
+    height: 40px;
+    width: 40px;
+}
+
+.iconoCuidamar{
+    height: 40px;
+    width: 40px;
+}
