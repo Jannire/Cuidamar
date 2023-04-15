@@ -1,5 +1,6 @@
 //import { Link } from "react-router-dom";
 import Header from "./header";
+import Footer from "./footer";
 import "./homepage.css";
 
 
@@ -42,7 +43,7 @@ const Home = (props) => {
                 </div>
             </div>
         </div>
-
+        <Footer/>
     </div>
 }
 

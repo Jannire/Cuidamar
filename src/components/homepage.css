@@ -40,6 +40,14 @@ body{
     width: 5%;
 }
 
+.footer{
+    background-color: #4d74bd;
+    bottom: 0;
+    height: 75px;
+    position: fixed;
+    width: 100%;
+}
+
 .imgPez{
     width: 200px;
     height: 150px;
