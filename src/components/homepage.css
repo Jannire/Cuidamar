@@ -41,11 +41,20 @@ body{
 }
 
 .imgPez{
-    width: 20%;
-    height: 20%;
+    width: 200px;
+    height: 150px;
 }
 
+.left{
+    justify-content: flex-end;
+    justify-items: end;
+}
 .right{
     margin-block-end: 0;
     margin-block-start: auto;
+}
+
+.row-flora{
+    height: 100px;
+    display: flex;
 }
