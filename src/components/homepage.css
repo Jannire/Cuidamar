@@ -6,14 +6,28 @@
 body{
     background-color: var(--blue);
 }
+.cuidamarTitle{
+    text-decoration: solid;
+    font-size:larger;
+    font-weight: bold;
+    color: black;
+}
 
+.cuidamarTitle:hover{
+    color: black;
+}
+
+.buscar{
+    width: 3%;
+    height: 3%;
+}
 
 .perfilIcon{
-    height: 40px;
-    width: 40px;
+    height: 3%;
+    width: 3%;
 }
 
 .iconoCuidamar{
-    height: 40px;
-    width: 40px;
+    height: 5%;
+    width: 5%;
 }
