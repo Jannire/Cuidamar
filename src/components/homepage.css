@@ -8,9 +8,11 @@ body{
 }
 .cuidamarTitle{
     text-decoration: solid;
-    font-size:larger;
+    font-size:150%;
     font-weight: bold;
     color: black;
+    padding-right: 70%;
+    margin-left: 3%;
 }
 
 .cuidamarTitle:hover{
@@ -20,6 +22,7 @@ body{
 .buscar{
     width: 3%;
     height: 3%;
+    margin-right: 2%;
 }
 
 .perfilIcon{

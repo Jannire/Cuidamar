@@ -5,9 +5,8 @@ const Header = () =>
 {
     return <div className="tabs sticky-top">
         <div className="container">
-            <img className="iconoCuidamar" src="../svgs/sea-icono.svg" alt="icono" />
+            <img className="tab iconoCuidamar" src="../svgs/sea-icono.svg" alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">  Cuidamar  </Link>
-            
             <img className="buscar" src="https://cdn-icons-png.flaticon.com/512/7018/7018972.png" alt="Search" />
             <Link to={"/Perfil"}><img className="perfilIcon" src="../svgs/account-perfil.svg" alt="Perfil" /></Link>
         </div>
