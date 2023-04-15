@@ -3,7 +3,7 @@ import "./homepage.css";
 
 const Header = () => 
 {
-    return <div className="tabs sticky-top">
+    return <div className="tabs sticky-top mb-5">
         <div className="container">
             <img className="tab iconoCuidamar" src="../svgs/sea-icono.svg" alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">  Cuidamar  </Link>

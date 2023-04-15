@@ -6,6 +6,11 @@
 body{
     background-color: var(--blue);
 }
+
+.tabs{
+    background-color: #4d74bd;
+}
+
 .cuidamarTitle{
     text-decoration: solid;
     font-size:150%;
@@ -33,4 +38,14 @@ body{
 .iconoCuidamar{
     height: 5%;
     width: 5%;
+}
+
+.imgPez{
+    width: 20%;
+    height: 20%;
+}
+
+.right{
+    margin-block-end: 0;
+    margin-block-start: auto;
 }
