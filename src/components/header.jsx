@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import "./homepage.css";
+import loginImage from "../images/LoginButton.png"
+import registerImage from "../images/RegisterButton.png"
 
 const Header = () => 
 {
