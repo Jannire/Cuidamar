@@ -16,7 +16,7 @@ body{
     font-size:150%;
     font-weight: bold;
     color: black;
-    padding-right: 70%;
+    padding-right: 50%;
     margin-left: 3%;
 }
 
@@ -65,4 +65,7 @@ body{
 .row-flora{
     height: 100px;
     display: flex;
+}
+#imagenLogin {
+    height: 50px;
 }

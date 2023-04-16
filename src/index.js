@@ -5,6 +5,8 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Home from './components/homepage';
 import Perfil from './components/perfil';
+import Register from './components/LoginRegister/register';
+import Login from './components/LoginRegister/login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +15,8 @@ root.render(
       <Routes>
         <Route path="/" element={ <Home/> }/>
         <Route path="/Perfil" element={ <Perfil/> } />
+        <Route path="/Register" element={ <Register/> } />
+        <Route path="/Login" element={ <Login/> } />
       </Routes>
     </HashRouter>
     
