@@ -24,11 +24,10 @@ const Header = () =>
     const token = localStorage.getItem("TOKEN")
     
     return <div className="tabs sticky-top mb-5">
-        <div className="container">
+        <div className="container text-center">
             <img className="tab iconoCuidamar" src="../svgs/sea-icono.svg" alt="icono" />
-            <Link to={"/"} className="tab cuidamarTitle">  Cuidamar  </Link>
+            <Link to={"/"} className="tab cuidamarTitle">Cuidamar</Link>
             <img className="buscar" src="https://cdn-icons-png.flaticon.com/512/7018/7018972.png" alt="Search" />
-            
             {
                 (()=>{
                     if(token.length === 0){
