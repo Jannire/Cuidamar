@@ -87,7 +87,7 @@ const Login = () => {
                         {
                             (() => {
                                 if (error === true) {
-                                    return <div className='alert alert-danger'>The account does not exist. Check your credentials.</div>
+                                    return <div className='alert alert-danger'>La cuenta con los datos ingresados no existe.</div>
                                 }
                             })()
                         }

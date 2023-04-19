@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "./header";
+import { Navigate } from "react-router-dom";
 
 const test = () => {
     const token = localStorage.getItem("TOKEN")
@@ -8,8 +9,9 @@ const test = () => {
 }
 
 const LogOut = () => {
-    localStorage.setItem("TOKEN", "")
-    localStorage.setItem("USUARIO_ID", "")
+    localStorage.clear("TOKEN")
+    localStorage.clear("USUARIO_ID")
+    
 }
 
 
