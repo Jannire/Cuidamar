@@ -71,15 +71,15 @@ const Login = () => {
 
                     <div id='textoContenedorR' className="mt-4"></div>
 
-                    <input type="text" class="form-control mt-3" placeholder="Email" value={correo}
+                    <input type="text" className="form-control mt-3" placeholder="Email" value={correo}
                         onChange={(evt) => { setCorreo(evt.target.value) }} />
 
-                    <input type="password" class="form-control mt-3" placeholder="Password" value={password}
+                    <input type="password" className="form-control mt-3" placeholder="Password" value={password}
                         onChange={(evt) => { setPassword(evt.target.value) }} />
 
 
-                    <div class="d-grid gap-2">
-                        <button id='botonLogin' class="btn btn-primary mt-3" type="button" onClick={
+                    <div className="d-grid gap-2">
+                        <button id='botonLogin' className="btn btn-primary mt-3" type="button" onClick={
                             async () => {
                                 onUsuarioDetected(correo);
                             }
@@ -94,13 +94,13 @@ const Login = () => {
                     </div>
 
 
-                    <Link to={"/Olvidada"}><div className="mt-2" id="forgotPassword"><a href=" ">Forgot your password?</a></div></Link>
+                    <Link to={"/Olvidada"}><div className="mt-2" id="forgotPassword">Forgot your password?</div></Link>
 
                     <div className="mt-4" id='textoContenedorR'>Don't have an account?</div>
 
                 <Link to={"/Register"}>
-                    <div class="d-grid gap-2">
-                        <button id='botonLogin' class="btn btn-primary mt-3 mb-4" type="button">SIGN UP</button>
+                    <div className="d-grid gap-2">
+                        <button id='botonLogin' className="btn btn-primary mt-3 mb-4" type="button">SIGN UP</button>
                     </div>
                 </Link>
                 <div className="row">
