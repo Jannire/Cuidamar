@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "./header";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const test = () => {
     const token = localStorage.getItem("TOKEN")
@@ -8,14 +8,11 @@ const test = () => {
     console.log(token + " y " + Usuario_ID)
 }
 
-const LogOut = () => {
-    localStorage.clear("TOKEN")
-    localStorage.clear("USUARIO_ID")
-    
-}
+
 
 
 const Perfil = () => {
+    const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,6 +23,12 @@ const Perfil = () => {
     const [usuarioLogueado, setUsuarioLogueado] = useState([])
     const [errorCorreo, setErrorCorreo] = useState(false);
 
+    const LogOut = () => {
+        localStorage.clear("TOKEN")
+        localStorage.clear("USUARIO_ID")
+        navigate("/")
+    }
+
     test();
     //LogOut();
     return (
@@ -35,7 +38,7 @@ const Perfil = () => {
             <div className="row" id="content-user">
                 <div id="content-buttons" className="col-2">
                     <div className="row"><button id="content-user-buttons" className="content-user-button-selected">Gestión de Perfil</button></div>
-                    <div className="row"><button id="content-user-buttons">Log Out</button></div>
+                    <div className="row"><button onClick={()=>{LogOut()}} id="content-user-buttons">Log Out</button></div>
                 </div>
                 <div id="content-user-info" className="col-7">
                     <div className="row">

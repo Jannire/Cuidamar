@@ -4,20 +4,21 @@
 }
 
 body{
-    background-color: var(--blue);
+    background-color: rgb(132, 230, 241);
 }
 
 .tabs{
-    background-color: #4d74bd;
+    background-color: #186386;
 }
 
 .cuidamarTitle{
     text-decoration: solid;
-    font-size:150%;
+    font-size:170%;
     font-weight: bold;
-    color: black;
-    padding-right: 60%;
+    color: rgb(255, 255, 255);
+    padding-right: 50%;
     margin-left: 3%;
+    font-style: italic;
 }
 
 .cuidamarTitle:hover{
@@ -68,7 +69,8 @@ body{
     display: flex;
 }
 #imagenLogin {
-    height: 50px;
+    height: 55px;
+    
 }
 
 #content{
@@ -127,4 +129,19 @@ body{
     height: 100px;
     margin-right: auto;
     margin-left: auto;
+}
+#imagenMarFondo{
+    background-image: url("../images/fondo_web.png");
+}
+#contenedorPeces{
+    margin-top: 40px;
+}
+#deslizaText{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px rgb(17, 52, 75);
+}
+#downarrow{
+    height: 50px;
 }

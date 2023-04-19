@@ -2,12 +2,61 @@
 import Header from "./header";
 import Footer from "./footer";
 import "./homepage.css";
-
+import downarrow from "../images/downarrow.png"
 
 const Home = (props) => {
-    return <div >
+    return <body id="imagenMarFondo">
         <Header />
+        
         <div className="container text-center">
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>         
+            <div className="row">
+                <div className="col" id="deslizaText">¡Desliza para conocer el inmenso mar Peruano!</div>
+            </div>
+            <div className="row">&nbsp;</div>
+            <div className="row">
+                <div className="col">
+                    <img src={downarrow} alt="" id="downarrow"/>
+                </div>
+            </div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
+            <div className="row">&nbsp;</div>
             <div className="row row-flora">
                 <div className="col-4 left">
                     <p>Animal A1</p>
@@ -42,9 +91,9 @@ const Home = (props) => {
                     <img className="imgPez" src="https://biodiversidadacuatica.imarpe.gob.pe/ImagenEspecies/Catalogo/107__26042019_1553.jpg" alt="anchoveta" />
                 </div>
             </div>
+            <div className="row"></div>
         </div>
-        <Footer/>
-    </div>
+    </body>
 }
 
 export default Home;
