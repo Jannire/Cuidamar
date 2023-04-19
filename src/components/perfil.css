@@ -1,0 +1,47 @@
+#content{
+    width:100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#content-user{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:100px;
+}
+#content-user-buttons{
+    background-color: white;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-width: 0px;
+}
+#content-user-info{
+    background-color: white;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding:15px;
+}
+
+.col-alt{
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.content-user-button-selected{
+    border-left: solid 15px lightblue !important;
+}
+
+#content-user-profile{
+    background-color: #4d74bd;
+    color:white;
+    font-size: 15px;
+    border-radius: 10px;
+    padding:10px;
+    border: 0px;
+}
