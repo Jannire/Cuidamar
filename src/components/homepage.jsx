@@ -5,9 +5,9 @@ import "./homepage.css";
 
 
 const Home = (props) => {
-    return <div>
+    return <div >
         <Header />
-        <div className="container">
+        <div className="container text-center">
             <div className="row row-flora">
                 <div className="col-4 left">
                     <p>Animal A1</p>
