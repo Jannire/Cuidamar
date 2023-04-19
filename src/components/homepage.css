@@ -36,8 +36,9 @@ body{
 }
 
 .iconoCuidamar{
-    height: 5%;
-    width: 5%;
+    margin-top: 5px;
+    height: 80px;
+    margin-bottom: 5px;
 }
 
 .footer{

@@ -1,0 +1,23 @@
+#contenedorR{
+    background: linear-gradient(to bottom,rgb(70, 127, 214),rgb(131, 198, 214));
+}
+#tituloContenedorR{
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 25px;
+    color: aliceblue;
+}
+#textoContenedorR{
+    color: aliceblue;
+    font-weight: bold;
+}
+#logoLogin{
+    height: 90px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+#botonLogin{
+    font-weight: bold;
+    font-style: italic;
+    background: linear-gradient(to bottom,rgb(27, 68, 134),rgb(67, 175, 226));
+}

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Header from "../header";
 import { Link , useNavigate} from "react-router-dom";
 import './login.css'
+import logo from "../../images/logo_cuidamar.png"
 
 const Login = () => {
 
@@ -106,6 +107,9 @@ const Login = () => {
                 </Link>
                 <div className="row">
                     <div className="col"></div>
+                    <div className="col">
+                        <img src={logo} alt="" id="logoLogin"/>
+                    </div>
                     <div className="col"></div>
                 </div>
                 

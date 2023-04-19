@@ -4,6 +4,7 @@ import loginImage from "../images/LoginButton.png"
 import registerImage from "../images/RegisterButton.png"
 import { useEffect, useState } from 'react'
 import { RUTA_BACKEND } from "../conf.js";
+import logo from "../images/logo_cuidamar.png"
 
 const Header = () => 
 {
@@ -29,7 +30,7 @@ const Header = () =>
 
     return <div className="tabs sticky-top mb-5">
         <div className="container">
-            <img className="tab iconoCuidamar" src="../svgs/sea-icono.svg" alt="icono" />
+            <img className="tab iconoCuidamar" src={logo} alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">  Cuidamar  </Link>
             <img className="buscar" src="https://cdn-icons-png.flaticon.com/512/7018/7018972.png" alt="Search" />
             
