@@ -12,8 +12,8 @@ const test = () => {
 }
 
 const LogOut = () => {
-    localStorage.setItem("TOKEN", "")
-    localStorage.setItem("USUARIO_ID", "")
+    localStorage.clear("TOKEN")
+    localStorage.clear("USUARIO_ID")
 }
 
 
