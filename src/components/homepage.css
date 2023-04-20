@@ -51,8 +51,7 @@ body{
 }
 
 .imgPez{
-    width: 200px;
-    height: 150px;
+    height: 40%;
 }
 
 .left{
@@ -144,4 +143,10 @@ body{
 }
 #downarrow{
     height: 50px;
+}
+
+#tituloPez{
+    font-size: 25px;
+    color: rgb(0, 56, 73);
+    font-weight: bold;
 }
