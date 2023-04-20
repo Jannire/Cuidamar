@@ -3,6 +3,10 @@ import Header from "./header";
 import Footer from "./footer";
 import "./homepage.css";
 import downarrow from "../images/downarrow.png"
+import lenguado from "../images/peces/lenguado.png"
+import pezespada from "../images/peces/pez_espada.png"
+import plastico from "../images/peces/plastico1.png"
+import lobomarino from "../images/peces/lobo_marino.png"
 
 const Home = (props) => {
     return <div id="imagenMarFondo">
@@ -55,42 +59,33 @@ const Home = (props) => {
             <div className="row">&nbsp;</div>
             <div className="row">&nbsp;</div>
             <div className="row">&nbsp;</div>
-            <div className="row">&nbsp;</div>
-            <div className="row">&nbsp;</div>
-            <div className="row row-flora">
-                <div className="col-4 left">
-                    <p>Animal A1</p>
-                    <img className="imgPez" src="https://biodiversidadacuatica.imarpe.gob.pe/ImagenEspecies/Catalogo/103__25052022_2121.jpg" alt="anchoveta" />
-                </div>
-                <div className="col"></div>
-                <div className="col-4"></div>
-            </div>
-            <div className="row row-flora">
-                <div className="col-4 right">
-                </div>
-                <div className="col"></div>
-                <div className="col-4">
-                    <p> Animal A2 </p>
-                    <img className="imgPez" src="https://biodiversidadacuatica.imarpe.gob.pe/ImagenEspecies/Catalogo/122__25052022_2125.jpg" alt="anchoveta" />
+
+            <div className="row">
+                <div className="col">
+                    <div className="mb-4" id="tituloPez">Lenguado - 20mt</div>
+                    <img className="imgPez" src={lenguado}/>
                 </div>
             </div>
-            <div className="row row-flora">
-                <div className="col-4 left">
-                    <p>Animal B1</p>
-                    <img className="imgPez" src="https://biodiversidadacuatica.imarpe.gob.pe/ImagenEspecies/Catalogo/797__25052022_2146.jpg" alt="anchoveta" />
+
+            <div className="row">
+                <div className="col-3">
+                    <div className="mb-4" id="tituloPez">Atun de Aleta Amarilla - 25mt</div>
+                    <img className="imgPez" src={pezespada}/>
                 </div>
-                <div className="col"></div>
-                <div className="col-4"></div>
-            </div>
-            <div className="row row-flora">
-                <div className="col-4 right">
-                </div>
-                <div className="col"></div>
-                <div className="col-4">
-                    <p> Animal B2 </p>
-                    <img className="imgPez" src="https://biodiversidadacuatica.imarpe.gob.pe/ImagenEspecies/Catalogo/107__26042019_1553.jpg" alt="anchoveta" />
+
+                <div className="col">
+                    <div className="mb-1" id="tituloPez">Plastico</div>
+                    <img className="imgPez" src={plastico}/>
                 </div>
             </div>
+
+            <div className="row">
+                <div className="col">
+                    <div className="mb-4" id="tituloPez">Lobo Marino - 35mt</div>
+                    <img className="imgPez" src={lobomarino}/>
+                </div>
+            </div>
+            
             <div className="row"></div>
         </div>
     </div>

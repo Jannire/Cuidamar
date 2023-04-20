@@ -61,7 +61,7 @@ const Login = () => {
         }
     }
 
-    return <div>
+    return <body id="fondoLoginRegister">
         <Header />
         <div className='container mt-5'>
 
@@ -112,10 +112,10 @@ const Login = () => {
                 
             </div>
             <div className='col'></div>
-                  
+           
         </div>
         </div>
-    </div>
+    </body>
 }
 
 export default Login;

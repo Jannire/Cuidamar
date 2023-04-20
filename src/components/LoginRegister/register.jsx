@@ -62,12 +62,35 @@ const Register = () => {
         usuarioRegister(Username, Correo, Password, Nombre, Apellido_Paterno, Apellido_Materno)
     }
 
+    const httpLogin = async (correo, password, Usuario_ID) => {
+        const resp = await fetch(`${RUTA_BACKEND}/Login`, {
+            method: "POST",
+            body: JSON.stringify({
+                Correo: correo,
+                Password: password,
+                Usuario_ID: Usuario_ID
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await resp.json()
+        console.log(data)
+        if (data.error === "") {
+            localStorage.setItem("TOKEN", data.token)
+            localStorage.setItem("USUARIO_ID", data.usuarioID)
+            navigate("/")
+        } else {
+            setError(true)
+        }
+    }
+
     useEffect(() => {
         httpObtenerUsuarios()
     }, [Correo])
 
 
-    return <div>
+    return <body id="fondoLoginRegister">
         <Header />
         <div className='container mt-5'>
 
@@ -129,7 +152,7 @@ const Register = () => {
 
             </div>
         </div>
-    </div>
+    </body>
 }
 
 export default Register;
