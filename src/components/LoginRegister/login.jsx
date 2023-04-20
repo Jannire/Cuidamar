@@ -50,7 +50,6 @@ const Login = () => {
             }
         })
         const data = await resp.json()
-        console.log(data)
         if (data.error === "") {
             localStorage.setItem("TOKEN", data.token)
             localStorage.setItem("USUARIO_ID", data.usuarioID)
@@ -61,7 +60,7 @@ const Login = () => {
         }
     }
 
-    return <body id="fondoLoginRegister">
+    return <div id="fondoLoginRegister">
         <Header />
         <div className='container mt-5'>
 
@@ -97,25 +96,25 @@ const Login = () => {
 
                     <div className="mt-4" id='textoContenedorR'>Don't have an account?</div>
 
-                <Link to={"/Register"}>
-                    <div className="d-grid gap-2">
-                        <button id='botonLogin' className="btn btn-primary mt-3 mb-4" type="button">SIGN UP</button>
+                    <Link to={"/Register"}>
+                        <div className="d-grid gap-2">
+                            <button id='botonLogin' className="btn btn-primary mt-3 mb-4" type="button">SIGN UP</button>
+                        </div>
+                    </Link>
+                    <div className="row">
+                        <div className="col"></div>
+                        <div className="col">
+                            <img src={logo} alt="" id="logoLogin" />
+                        </div>
+                        <div className="col"></div>
                     </div>
-                </Link>
-                <div className="row">
-                    <div className="col"></div>
-                    <div className="col">
-                        <img src={logo} alt="" id="logoLogin"/>
-                    </div>
-                    <div className="col"></div>
+
                 </div>
-                
+                <div className='col'></div>
+
             </div>
-            <div className='col'></div>
-           
         </div>
-        </div>
-    </body>
+    </div>
 }
 
 export default Login;

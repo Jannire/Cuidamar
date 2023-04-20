@@ -58,7 +58,6 @@ const Perfil = () => {
             Apellido_Materno: apellido_m,
             Nombre: nom
         }
-        console.log(object)
         const resp = await fetch(`${RUTA_BACKEND}/Modificar`, {
             method: "POST",
             body: JSON.stringify(object),
@@ -67,7 +66,6 @@ const Perfil = () => {
             }
         })
         const data = await resp.json()
-        console.log(data)
         if (data.error === "") {
             setErrorCorreo(false);
             setErrorUsername(false);
