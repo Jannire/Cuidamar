@@ -7,9 +7,7 @@ import './login.css'
 import logo from "../../images/logo_cuidamar.png"
 
 const Login = () => {
-
     const [error, setError] = useState(false)
-    const [Usuario, setUsuario] = useState([])
     const [password, setPassword] = useState("")
     const [correo, setCorreo] = useState("")
     const navigate = useNavigate()
@@ -20,11 +18,10 @@ const Login = () => {
             `${RUTA_BACKEND}/Usuarios?Correo=${usuarioCorreo}`
         const resp = await fetch(ruta)
         const data = await resp.json()
-        console.log(data)
-        setUsuario(data)
         const filter = data.filter(element => { if (element.Correo === correo) { return true } return false });
         if (filter.length > 0) {
-            httpLogin(correo, password, filter[0].Usuario_ID);
+            const userData = filter[0];
+            httpLogin(userData);
         } else {
             setError(true);
         }
@@ -36,13 +33,17 @@ const Login = () => {
 
     }
 
-    const httpLogin = async (correo, password, Usuario_ID) => {
+    const httpLogin = async (userData) => {
         const resp = await fetch(`${RUTA_BACKEND}/Login`, {
             method: "POST",
             body: JSON.stringify({
-                Correo: correo,
-                Password: password,
-                Usuario_ID: Usuario_ID
+                Correo: userData.Correo,
+                Password: userData.Password,
+                Usuario_ID: userData.Usuario_ID,
+                Username: userData.Username,
+                Apellido_Paterno: userData.Apellido_Paterno,
+                Apellido_Materno: userData.Apellido_Materno,
+                Nombre: userData.Nombre
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -53,6 +54,7 @@ const Login = () => {
         if (data.error === "") {
             localStorage.setItem("TOKEN", data.token)
             localStorage.setItem("USUARIO_ID", data.usuarioID)
+            localStorage.setItem("FULL_CREDENTIALS", JSON.stringify(data.fullCredentials))
             navigate("/")
         } else {
             setError(true)
@@ -71,11 +73,8 @@ const Login = () => {
 
                     <div id='textoContenedorR' className="mt-4"></div>
 
-                    <input type="text" className="form-control mt-3" placeholder="Email" value={correo}
-                        onChange={(evt) => { setCorreo(evt.target.value) }} />
-
-                    <input type="password" className="form-control mt-3" placeholder="Password" value={password}
-                        onChange={(evt) => { setPassword(evt.target.value) }} />
+                    <input type="text" className="form-control mt-3" placeholder="Email" value={correo} onChange={(evt) => { setCorreo(evt.target.value) }} />
+                    <input type="password" className="form-control mt-3" placeholder="Password" value={password} onChange={(evt) => { setPassword(evt.target.value) }} />
 
 
                     <div className="d-grid gap-2">

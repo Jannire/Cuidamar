@@ -5,7 +5,7 @@ import "./homepage.css";
 import downarrow from "../images/downarrow.png"
 
 const Home = (props) => {
-    return <body id="imagenMarFondo">
+    return <div id="imagenMarFondo">
         <Header />
         
         <div className="container text-center">
@@ -93,7 +93,7 @@ const Home = (props) => {
             </div>
             <div className="row"></div>
         </div>
-    </body>
+    </div>
 }
 
 export default Home;
