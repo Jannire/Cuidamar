@@ -52,7 +52,7 @@ const Register = () => {
             setErrortxt(dataResp.error)
         } else {
             setError(false)
-            navigate("/")
+            navigate("/login")
 
         }
         httpObtenerUsuarios(Correo)
@@ -103,6 +103,7 @@ const Register = () => {
                             onClick={
                                 () => {
                                     registrar(Username, Correo, Password, Nombre, Apellido_Paterno, Apellido_Materno)
+                                    
                                 }
                             }
                         >REGISTER</button>
