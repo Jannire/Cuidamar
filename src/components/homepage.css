@@ -150,3 +150,17 @@ body{
     color: rgb(0, 56, 73);
     font-weight: bold;
 }
+
+#imgPez{
+    height: 200px;
+    margin-bottom: 70px;
+}
+
+.modal-body{
+    text-align: left;
+}
+#imagenDetalle{
+    height: 250px;
+    margin: auto;
+    display: block;
+}

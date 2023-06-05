@@ -90,8 +90,6 @@ const Login = () => {
                             })()
                         }
                     </div>
-
-
                     <Link to={"/Olvidada"}><div className="mt-2" id="forgotPassword">Forgot your password?</div></Link>
 
                     <div className="mt-4" id='textoContenedorR'>Don't have an account?</div>
