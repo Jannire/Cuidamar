@@ -7,6 +7,7 @@ import Home from './components/homepage';
 import Perfil from './components/perfil';
 import Register from './components/LoginRegister/register';
 import Login from './components/LoginRegister/login';
+import ForoMain from './components/Foros/ForoMain';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
         <Route path="/Perfil" element={ <Perfil/> } />
         <Route path="/Register" element={ <Register/> } />
         <Route path="/Login" element={ <Login/> } />
+        <Route path="/ForoMain" element={ <ForoMain/> } />
       </Routes>
     </HashRouter>
     

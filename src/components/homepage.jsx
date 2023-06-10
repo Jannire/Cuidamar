@@ -21,6 +21,7 @@ const Home = (props) => {
             `${RUTA_BACKEND}/Animal?AnimalID=${AnimalID}`
         const resp = await fetch(ruta)
         const data = await resp.json()
+        data.sort((x,y)=>x.Profundidad - y.Profundidad);
         setListadoAnimal(data)
     }
     
@@ -87,7 +88,8 @@ const Home = (props) => {
                     return <div className="row">
                         <div className="col">
                             <div className="mb-4" id="tituloPez">{`${animal.Nombre} - ${animal.Profundidad}m`}</div>
-                            <img id="imgPez" data-bs-toggle="modal" data-bs-target={`#staticBackdrop${animal.AnimalID}`} src={`${animal.Imagen}`}/>
+                            <img id="imgPez"  data-bs-toggle="modal" data-bs-target={`#staticBackdrop${animal.AnimalID}`} src={`${animal.Imagen}`}/>
+                            
 
                             <div class="modal fade" id={`staticBackdrop${animal.AnimalID}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">

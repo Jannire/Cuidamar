@@ -26,7 +26,7 @@ const Login = () => {
             setError(true);
         }
     }
-
+    
     const onUsuarioDetected = (usuarioCorreo) => {
         console.log("se busca los datos de " + usuarioCorreo)
         httpObtenerUsuarios(usuarioCorreo);

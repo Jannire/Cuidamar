@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: rgb(23, 180, 208);
+    background-color: rgb(35, 174, 255);
 }
 
 .tabs{
@@ -131,6 +131,7 @@ body{
 }
 #imagenMarFondo{
     background-image: url("../images/fondo_web.png");
+    background-repeat: no-repeat;
 }
 #contenedorPeces{
     margin-top: 40px;
@@ -153,7 +154,7 @@ body{
 
 #imgPez{
     height: 200px;
-    margin-bottom: 70px;
+    margin-bottom: 200px;
 }
 
 .modal-body{
@@ -163,4 +164,38 @@ body{
     height: 250px;
     margin: auto;
     display: block;
+}
+
+.cuidamarForo{
+    text-decoration: solid;
+    font-size:170%;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-left: -20px;
+    margin-right: 20px;
+    font-style: italic;
+}
+
+.cuidamarForo:hover{
+    color: black;
+}
+
+#contenedorForoPost{
+    border-style:groove;
+    border-color: aliceblue;
+    border-radius: 10px;
+    background: linear-gradient(to bottom,rgba(52, 98, 172, 0.603),rgba(67, 176, 226, 0.5));
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#contenedorPosteado{
+    border-style:groove;
+    border-color: aliceblue;
+    border-radius: 10px;
+    background: linear-gradient(to bottom,rgba(126, 126, 126, 0.863),rgba(175, 175, 175, 0.781));
+    color: black;
+    font-size: 20px;
+    margin-top: 10px;
 }

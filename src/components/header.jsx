@@ -28,6 +28,7 @@ const Header = () =>
         <div className="container">
             <img className="tab iconoCuidamar" src={logo} alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">CuidaMar</Link>
+            <span><Link to={"/ForoMain"} className="cuidamarForo">Foro</Link></span>
             <img className="buscar" src="https://cdn-icons-png.flaticon.com/512/7018/7018972.png" alt="Search" />
             {
                 (()=>{
