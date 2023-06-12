@@ -28,8 +28,8 @@ const Header = () =>
         <div className="container">
             <img className="tab iconoCuidamar" src={logo} alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">CuidaMar</Link>
-            <span><Link to={"/ForoMain"} className="cuidamarForo">Foro</Link></span>
-            <img className="buscar" src="https://cdn-icons-png.flaticon.com/512/7018/7018972.png" alt="Search" />
+            <span><Link to={"/ForoMain"} className="cuidamarForo" style={{marginRight:"5px"}}>Foro</Link></span>
+            
             {
                 (()=>{
                     if(token === null){
@@ -39,7 +39,7 @@ const Header = () =>
                         </>
                     }else{
                         return <>
-                            <Link to={"/Perfil"}><img className="perfilIcon" src="../svgs/account-perfil.svg" alt="Perfil" /></Link>
+                            <Link to={"/DetallePerfil"}><img className="perfilIcon" src="../svgs/account-perfil.svg" alt="Perfil" onClick={()=>{localStorage.setItem("detallePerfil",usuarioID);}}/></Link>
                         </>
                     }
                 })()
