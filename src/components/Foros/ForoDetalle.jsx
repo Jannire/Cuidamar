@@ -109,7 +109,7 @@ const ForoDetalle = () => {
                             <div class="row mb-1" style={{fontWeight:"bold"}}>
                                 
                                     {listadoUsuarios.map((usuario)=>{if(usuario.Usuario_ID === post.Usuario_ID){
-                                        return <div className="col-11">{`${post.Titulo}`} - <Link to={"/DetallePerfil"} style={{color:"white"}} onClick={()=>{localStorage.setItem("detallePerfil",post.Usuario_ID)}}>{`${usuario.Username}`}</Link></div>
+                                        return <div className="col-11 mt-1">{`${post.Titulo}`} - <Link to={"/DetallePerfil"} style={{color:"white"}} onClick={()=>{localStorage.setItem("detallePerfil",post.Usuario_ID)}}>{`${usuario.Username}`}</Link></div>
                                     }})}
                                     
                                 
@@ -147,7 +147,7 @@ const ForoDetalle = () => {
                                 }
                                 
                             </div>
-                            <div className="mb-2">{`${post.Cuerpo}`}</div>
+                            <div className="mb-2 mt-2">{`${post.Cuerpo}`}</div>
                         </div>
                     </div>
 
@@ -159,10 +159,18 @@ const ForoDetalle = () => {
                     
                     <div className="container">
                         <div className="col-12 mt-2">
-                            <div class="input-group mb-3">
-                                <input style={{marginLeft:"-15px"}} type="text" class="form-control" placeholder="Escribe aqui..." value={comentario} onChange={(evt) => {setComentario(evt.target.value);}}/>
-                                <button style={{width:"100px",marginRight:"-10px",backgroundColor:"black"}} class="btn btn-primary" type="button" id="button-addon1" onClick={()=>{crearComentario(POSTDETALLE,USUARIO_ID,comentario,hoy);}}>Comentar</button>
-                            </div>
+                            
+                                {(()=>{
+                                    if(USUARIO_ID===null){
+                                        return <div style={{color:"white",fontWeight:"bold",fontSize:"25px"}}>Inicie sesion para comentar!</div>
+                                    }else{
+                                        return <div class="input-group mb-3">
+                                            <input style={{marginLeft:"-15px"}} type="text" class="form-control" placeholder="Escribe aqui..." value={comentario} onChange={(evt) => {setComentario(evt.target.value);}}/>
+                                            <button style={{width:"100px",marginRight:"-10px",backgroundColor:"black"}} class="btn btn-primary" type="button" id="button-addon1" onClick={()=>{crearComentario(POSTDETALLE,USUARIO_ID,comentario,hoy);}}>Comentar</button>  
+                                        </div>
+                                    }
+                                })()}
+                                
                             {
                                 listadoComentarios.map((comentario)=>{
                                     return <div className="row mt-3" style={{background:"rgb(17, 52, 75,0.08)",borderRadius:"10px"}}>

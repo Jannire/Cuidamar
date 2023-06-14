@@ -73,33 +73,42 @@ const ForoMain = () => {
         </div>
 
         <div id="contenedorForoPost" className="container">
-            <div className="col-12">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Titulo</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" value={Titulo} placeholder="Escribe aqui..." onChange={(evt) => {setTitulo(evt.target.value);console.log(Titulo) }} />
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">De que quieres hablarnos?</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={Cuerpo} placeholder="Escribe aqui..." onChange={(evt) => { setCuerpo(evt.target.value);console.log(Cuerpo) }} ></textarea>
-                </div>
-                <div class="d-grid gap-2 mb-3">
-                    <button class="btn btn-primary" type="button" style={{borderColor:"white",borderWidth:"3px",background:"lightblue",color:"black",fontWeight:"bold"}}
-                    onClick = {
-                        ()=>{
-                            crearPost(USUARIO_ID,Cuerpo,Titulo);
-                            obtenerPost();
-                        }
-                    }
-                >Post</button>
-                    {
-                        (()=>{
-                            if(error === true){
-                                return <div className='alert alert-danger'>{errortxt}</div>
+            {
+                (()=>{
+                    if(USUARIO_ID !== null){
+                        return <div className="col-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" value={Titulo} placeholder="Escribe aqui..." onChange={(evt) => {setTitulo(evt.target.value);console.log(Titulo) }} />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">De que quieres hablarnos?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={Cuerpo} placeholder="Escribe aqui..." onChange={(evt) => { setCuerpo(evt.target.value);console.log(Cuerpo) }} ></textarea>
+                        </div>
+                        <div class="d-grid gap-2 mb-3">
+                            <button class="btn btn-primary" type="button" style={{borderColor:"white",borderWidth:"3px",background:"lightblue",color:"black",fontWeight:"bold"}}
+                            onClick = {
+                                ()=>{
+                                    crearPost(USUARIO_ID,Cuerpo,Titulo);
+                                    obtenerPost();
+                                }
                             }
-                        })()
+                        >Post</button>
+                            {
+                                (()=>{
+                                    if(error === true){
+                                        return <div className='alert alert-danger'>{errortxt}</div>
+                                    }
+                                })()
+                            }
+                        </div>
+                    </div>
+                    }else{
+                        return <div className="mt-2 mb-2">Inicia sesion para poder participar en el Foro!</div>
                     }
-                </div>
-            </div>
+                })()
+            }
+            
         </div>
         {
             listadoPost.map((post)=>{
