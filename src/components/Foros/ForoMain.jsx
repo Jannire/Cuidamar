@@ -13,7 +13,17 @@ const ForoMain = () => {
     const [listadoPost, setListadoPost] = useState([]);
     const [error,setError] = useState(false);
     const [errortxt,setErrortxt] = useState("");
+    const [listadoUsuarios, setListadoUsuarios] = useState([])
     const navigate = useNavigate()
+
+    const httpObtenerUsuario = async (Usuario_ID = null) => {
+        const ruta = Usuario_ID == null ?
+            `${RUTA_BACKEND}/Usuarios` : 
+            `${RUTA_BACKEND}/Usuarios?Usuario_ID=${Usuario_ID}`
+        const resp = await fetch(ruta)
+        const data = await resp.json()
+        setListadoUsuarios(data)
+    }
 
     const crearPost = async (Usuario_ID,Cuerpo,Titulo) => {
         const data = {
@@ -48,6 +58,7 @@ const ForoMain = () => {
 
     useEffect(() => {
         obtenerPost()
+        httpObtenerUsuario()
     }, [])
 
     return <div>
@@ -95,9 +106,16 @@ const ForoMain = () => {
                 return <div className="container mb-2" id="contenedorPosteado">
                     <div className="col-12 mt-1 mb-1">
                         <div class="mb-1">
-                            <label class="form-label" style={{fontWeight:"bold"}}>{`${post.Titulo}`} - <Link to={"/DetallePerfil"} onClick={()=>{localStorage.setItem("detallePerfil",post.Usuario_ID)}}>{`${post.Usuario_ID}`}</Link></label>
+                            {
+                                listadoUsuarios.map((usuario)=>{
+                                    if(usuario.Usuario_ID === post.Usuario_ID){
+                                        return <label class="form-label" style={{fontWeight:"bold",fontSize:"22px",marginTop:"5px",marginBottom:"15px"}}>{`${post.Titulo}`} - <Link to={"/DetallePerfil"} style={{color:"white"}} onClick={()=>{localStorage.setItem("detallePerfil",post.Usuario_ID)}}>{`${usuario.Username}`}</Link></label>
+                                    }
+                                })
+                            }
+                            
                         </div>
-                        <div className="mb-2">{`${post.Cuerpo}`}</div>
+                        <div style={{marginBottom:"15px",fontSize:"16px"}} className="mb-2">{`${post.Cuerpo}`}</div>
                         <div className="row">
                             <span onClick={()=>{localStorage.setItem("detalleForo",post.PostID)}}><Link to={"/ForoDetalle"}>{`ver discusion ->`}</Link></span>
                         </div>

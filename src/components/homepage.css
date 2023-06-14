@@ -153,17 +153,21 @@ body{
 }
 
 #imgPez{
-    height: 200px;
-    margin-bottom: 200px;
+    height: 150px;
+    margin-bottom: 100px;
+    
+    mix-blend-mode: multiply;
 }
 
 .modal-body{
     text-align: left;
 }
 #imagenDetalle{
-    height: 250px;
+    width: 450px;
     margin: auto;
     display: block;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .cuidamarForo{
@@ -194,8 +198,26 @@ body{
     border-style:groove;
     border-color: aliceblue;
     border-radius: 10px;
-    background: linear-gradient(to bottom,rgba(126, 126, 126, 0.863),rgba(175, 175, 175, 0.781));
+    background: linear-gradient(to bottom,rgba(76, 136, 206, 0.863),rgba(149, 182, 255, 0.781));
     color: black;
     font-size: 20px;
     margin-top: 10px;
+}
+
+#botonFav{
+    font-size: 12px;
+    font-weight: bold;
+    height: 30px;
+    width: 130px;
+}
+
+#encabezadoComentario{
+    color: black;
+    opacity: 1.0;
+}
+
+#fondoComentario{
+    background-color: black;
+    background-blend-mode: color;
+    opacity: 0.1;
 }

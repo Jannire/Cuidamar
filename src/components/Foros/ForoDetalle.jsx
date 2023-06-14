@@ -17,7 +17,7 @@ const ForoDetalle = () => {
     
     const hoy = `${day}/${month}/${year}`;
     
-    
+    const [listadoUsuarios, setListadoUsuarios] = useState([])
     const USUARIO_ID = localStorage.getItem("USUARIO_ID")
     const [listadoPost, setListadoPost] = useState([])
     const [listadoComentarios, setListadoComentarios] = useState([])
@@ -36,6 +36,15 @@ const ForoDetalle = () => {
         const resp = await fetch(ruta)
         const data = await resp.json()
         setListadoComentarios(data)
+    }
+
+    const httpObtenerUsuario = async (Usuario_ID = null) => {
+        const ruta = Usuario_ID == null ?
+            `${RUTA_BACKEND}/Usuarios` : 
+            `${RUTA_BACKEND}/Usuarios?Usuario_ID=${Usuario_ID}`
+        const resp = await fetch(ruta)
+        const data = await resp.json()
+        setListadoUsuarios(data)
     }
 
     const crearComentario = async (PostID,Usuario_ID,Contenido,fecha) => {
@@ -85,6 +94,7 @@ const ForoDetalle = () => {
     useEffect(() => {
         obtenerPost(POSTDETALLE)
         obtenerComentarios(POSTDETALLE)
+        httpObtenerUsuario()
     }, [])
 
     return <div>
@@ -97,9 +107,12 @@ const ForoDetalle = () => {
                     <div className="container" id="contenedorPosteado">
                         <div className="col-12 mt-1">
                             <div class="row mb-1" style={{fontWeight:"bold"}}>
-                                <div className="col-11">
-                                    {`${post.Titulo}`} - <Link to={"/DetallePerfil"} onClick={()=>{localStorage.setItem("detallePerfil",post.Usuario_ID)}}>{`${post.Usuario_ID}`}</Link>
-                                </div>
+                                
+                                    {listadoUsuarios.map((usuario)=>{if(usuario.Usuario_ID === post.Usuario_ID){
+                                        return <div className="col-11">{`${post.Titulo}`} - <Link to={"/DetallePerfil"} style={{color:"white"}} onClick={()=>{localStorage.setItem("detallePerfil",post.Usuario_ID)}}>{`${usuario.Username}`}</Link></div>
+                                    }})}
+                                    
+                                
                                 {
                                     (()=>{
                                         if(USUARIO_ID === post.Usuario_ID){
@@ -139,24 +152,28 @@ const ForoDetalle = () => {
                     </div>
 
                     <div className="container">
-                        <div className="col-12 mt-3">
+                        <div style={{marginLeft:"-15px", fontSize:"20px", fontWeight:"bold", fontStyle:"italic"}} className="col-12 mt-4">
                             Comentarios
                         </div>
                     </div>
                     
                     <div className="container">
-                        <div className="col-12 mt-3">
+                        <div className="col-12 mt-2">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Escribe aqui..." value={comentario} onChange={(evt) => {setComentario(evt.target.value);}}/>
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon1" onClick={()=>{crearComentario(POSTDETALLE,USUARIO_ID,comentario,hoy);}}>Comentar</button>
+                                <input style={{marginLeft:"-15px"}} type="text" class="form-control" placeholder="Escribe aqui..." value={comentario} onChange={(evt) => {setComentario(evt.target.value);}}/>
+                                <button style={{width:"100px",marginRight:"-10px",backgroundColor:"black"}} class="btn btn-primary" type="button" id="button-addon1" onClick={()=>{crearComentario(POSTDETALLE,USUARIO_ID,comentario,hoy);}}>Comentar</button>
                             </div>
                             {
                                 listadoComentarios.map((comentario)=>{
-                                    return <div className="mt-3">
-                                        <div className="row">
-                                            {`${comentario.Usuario_ID} - ${comentario.fecha}`}
-                                        </div>
-                                        <div className="row">
+                                    return <div className="row mt-3" style={{background:"rgb(17, 52, 75,0.08)",borderRadius:"10px"}}>
+                                        <div className="mt-1"></div>
+                                        {listadoUsuarios.map((usuario)=>{if(usuario.Usuario_ID===comentario.Usuario_ID){
+                                            return <div className="row mb-1" style={{fontSize:"17px", fontWeight:"bold",marginLeft:"1px"}}>
+                                                    {`${usuario.Username} - ${comentario.fecha}`}
+                                                </div>
+                                        }})}
+
+                                        <div className="row mb-1" id="cuerpoComentario" style={{marginLeft:"1px"}}>
                                             {`${comentario.Contenido}`}
                                         </div>
                                     </div>

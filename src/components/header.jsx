@@ -28,7 +28,7 @@ const Header = () =>
         <div className="container">
             <img className="tab iconoCuidamar" src={logo} alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">CuidaMar</Link>
-            <span><Link to={"/ForoMain"} className="cuidamarForo" style={{marginRight:"5px"}}>Foro</Link></span>
+            <span><Link to={"/ForoMain"} className="cuidamarForo" style={{marginRight:"30px"}}>Foro</Link></span>
             
             {
                 (()=>{
