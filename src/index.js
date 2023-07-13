@@ -10,6 +10,8 @@ import Login from './components/LoginRegister/login';
 import ForoMain from './components/Foros/ForoMain';
 import ForoDetalle from './components/Foros/ForoDetalle';
 import DetallePerfil from './components/DetallePerfil';
+import Solicitar from './components/contaminantes/solicitar';
+import Revision from './components/contaminantes/revision';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +25,8 @@ root.render(
         <Route path="/ForoMain" element={ <ForoMain/> } />
         <Route path="/ForoDetalle" element={ <ForoDetalle/> } />
         <Route path="/detallePerfil" element={ <DetallePerfil/> } />
+        <Route path="/solicitar" element={ <Solicitar/> } />
+        <Route path="/Revision" element={ <Revision/> } />
       </Routes>
     </HashRouter>
     

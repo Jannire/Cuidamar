@@ -36,7 +36,8 @@ const Register = () => {
             Password: Password,
             Nombre: Nombre,
             Apellido_Materno: Apellido_Materno,
-            Apellido_Paterno: Apellido_Paterno
+            Apellido_Paterno: Apellido_Paterno,
+            Admin : false
         }
         const resp = await fetch(`${RUTA_BACKEND}/Usuarios`, {
             method: "POST",
