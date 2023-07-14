@@ -9,6 +9,11 @@ import logo from "../images/logo_cuidamar.png"
 const Header = () => 
 {
     const usuarioID = localStorage.getItem("USUARIO_ID")
+    let eresAdmin = localStorage.getItem("FULL_CREDENTIALS")
+    if(eresAdmin != null){
+        eresAdmin = JSON.parse(eresAdmin)
+        eresAdmin = eresAdmin.admin
+    }
     const [listadoUsuarios, setListadoUsuarios] = useState([])
     const httpObtenerUsuario = async (Usuario_ID = null) => {
         const ruta = Usuario_ID == null ?
@@ -28,8 +33,15 @@ const Header = () =>
         <div className="container">
             <img className="tab iconoCuidamar" src={logo} alt="icono" />
             <Link to={"/"} className="tab cuidamarTitle">CuidaMar</Link>
-            <span><Link to={"/ForoMain"} className="cuidamarForo" style={{marginRight:"30px"}}>Foro</Link></span>
+            {
+                (()=>{
+                    if(eresAdmin == true){
+                        return <span><Link to={"/Revision"} className="cuidamarForo" style={{marginRight:"30px"}}>Solicitudes</Link></span>
+                    }
+                })()
+            }
             
+            <span><Link to={"/ForoMain"} className="cuidamarForo" style={{marginRight:"30px"}}>Foro</Link></span>
             {
                 (()=>{
                     if(token === null){

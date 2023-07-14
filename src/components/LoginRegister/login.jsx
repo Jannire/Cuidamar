@@ -50,6 +50,8 @@ const Login = () => {
             }
         })
         const data = await resp.json()
+        console.log("DATA: -------- ")
+        console.log(data)
         if (data.error === "") {
             localStorage.setItem("TOKEN", data.token)
             localStorage.setItem("USUARIO_ID", data.usuarioID)
