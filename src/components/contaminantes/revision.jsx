@@ -46,21 +46,39 @@ const Revision = () => {
 
     const agregarContaminante = async (Nombre, Descripcion, Imagen, Profundidad, Contador, SolicitudID) => {
         const data = {
-            Nombre : Nombre,
-            Descripcion : Descripcion,
+            Nombre: Nombre,
+            Descripcion: Descripcion,
             Imagen: Imagen,
             Profundidad: Profundidad,
-            Contador: Contador            
+            Contador: Contador
         }
         const resp = await fetch(`${RUTA_BACKEND}/Contaminante`, {
-            method : "POST",
-            body : JSON.stringify(data),
-            headers : {
-                "Content-Type" : "application/json"
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
             }
         })
         console.log(resp.status);
         const dataResp = await resp.json()
+        obtenerContaminantes()
+        eliminarSolicitud(SolicitudID)
+    }
+
+    const modificarContaminante = async (Nombre, ContaminanteID, SolicitudID) => {
+        console.log(Nombre);
+        console.log(ContaminanteID);
+        const data = {
+            Nombre: Nombre,
+            ContaminanteID: ContaminanteID,
+        }
+        const resp = await fetch(`${RUTA_BACKEND}/Contaminante`, {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
         obtenerContaminantes()
         eliminarSolicitud(SolicitudID)
     }
@@ -96,10 +114,6 @@ const Revision = () => {
                                         <div>
                                             "Imagen"
                                         </div>
-                                        <div className="py-3">
-                                            Profundidad
-                                            <input min="0" max="1000000" type="number" value={profundidadInt} onChange={e => setProfundidadInt(e.target.value)} className="my-2 form-control" placeholder="Profundidad" />
-                                        </div>
                                         <div className="dropdown">
                                             <label for="contaminanteSelect">Contaminante</label>
                                             <select id="contaminanteSelect" className="form-control form-select" value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
@@ -113,11 +127,21 @@ const Revision = () => {
 
                                             </select>
                                         </div>
+                                        {
+                                            selectedOption == '' ? <div className="py-3">
+                                                Profundidad
+                                                <input min="0" max="1000000" type="number" value={profundidadInt} onChange={e => setProfundidadInt(e.target.value)} className="my-2 form-control" placeholder="Profundidad" />
+                                            </div> : null
+                                        }
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={()=>{agregarContaminante(solicitud.Nombre, solicitud.Descripcion, solicitud.Imagen, profundidadInt, 0, solicitud.SolicitudID)}}>Agregar</button>
-                                        
+                                        {
+                                            selectedOption == '' ? <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { agregarContaminante(solicitud.Nombre, solicitud.Descripcion, solicitud.Imagen, profundidadInt, 0, solicitud.SolicitudID) }}>Agregar</button>
+                                            : <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { modificarContaminante(solicitud.Nombre, selectedOption, solicitud.SolicitudID) }}>Agregar</button>
+                                        }
+
                                     </div>
                                 </div>
                             </div>
