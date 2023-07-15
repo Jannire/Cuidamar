@@ -143,7 +143,6 @@ const Home = (props) => {
                             <div className="mb-3" id="tituloPez">{`${animal.Nombre} - ${animal.Profundidad}m`}</div>
                             <img id="imgPez"  data-bs-toggle="modal" data-bs-target={`#staticBackdrop${animal.AnimalID}`} src={`${animal.Imagen}`} onClick={()=>{obtenerFavoritos(USUARIO_ID,animal.AnimalID)}}/>
                             
-
                             <div class="modal fade" id={`staticBackdrop${animal.AnimalID}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
