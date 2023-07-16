@@ -4,10 +4,13 @@ import Header from "../header";
 import { useEffect, useState } from "react";
 import { RUTA_BACKEND } from "../../conf";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 const Revision = () => {
     const [listadoSolicitud, setListadoSolicitud] = useState([])
     const [listadoContaminante, setListadoContaminante] = useState([])
+    const [listadoAnimal, setListadoAnimal] = useState([])
 
     const obtenerSolicitud = async (SolicitudID = null) => {
         const ruta = SolicitudID == null ?
@@ -83,14 +86,28 @@ const Revision = () => {
         eliminarSolicitud(SolicitudID)
     }
 
+    const obtenerAnimal = async (AnimalID = null) => {
+        const ruta = AnimalID == null ?
+            `${RUTA_BACKEND}/Animal` :
+            `${RUTA_BACKEND}/Animal?AnimalID=${AnimalID}`
+        const resp = await fetch(ruta)
+        const data = await resp.json()
+        console.log("Animales: ")
+        console.log(data)
+        setListadoAnimal(data)
+    }
+
     const [selectedOption, setSelectedOption] = useState("");
     const [profundidadInt, setProfundidadInt] = useState(0);
+    const [afectados, setAfectados] = useState([]);
+    const animatedComponents = makeAnimated();
 
     useEffect(() => {
+        obtenerAnimal()
         obtenerSolicitud()
         obtenerContaminantes()
     }, [])
-    console.log(profundidadInt)
+    console.log(afectados)
     function aver(event) {
         console.log("Probandoooooo")
     }
@@ -115,7 +132,7 @@ const Revision = () => {
                                             "Imagen"
                                         </div>
                                         <div className="dropdown">
-                                            <label for="contaminanteSelect">Contaminante</label>
+                                            <label for="contaminanteSelect" className="py-2">Contaminante</label>
                                             <select id="contaminanteSelect" className="form-control form-select" value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
                                                 {
                                                     listadoContaminante.map((contaminante) => {
@@ -131,15 +148,26 @@ const Revision = () => {
                                             selectedOption == '' ? <div className="py-3">
                                                 Profundidad
                                                 <input min="0" max="1000000" type="number" value={profundidadInt} onChange={e => setProfundidadInt(e.target.value)} className="my-2 form-control" placeholder="Profundidad" />
+                                                <label> Animales afectados </label>
+                                                <Select
+                                                    isMulti
+                                                    name="animalesAfectados"
+                                                    options={listadoAnimal.map(animal => ({value: animal.AnimalID,  label: animal.Nombre}))}
+                                                    className="basic-multi-select py-2"
+                                                    classNamePrefix="select"
+                                                    components={animatedComponents}
+                                                    closeMenuOnSelect={false}
+                                                    value={afectados}
+                                                    onChange={animal => setAfectados(animal)}
+                                                />
                                             </div> : null
                                         }
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                         {
                                             selectedOption == '' ? <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { agregarContaminante(solicitud.Nombre, solicitud.Descripcion, solicitud.Imagen, profundidadInt, 0, solicitud.SolicitudID) }}>Agregar</button>
-                                            : <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { modificarContaminante(solicitud.Nombre, selectedOption, solicitud.SolicitudID) }}>Agregar</button>
+                                                : <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { modificarContaminante(solicitud.Nombre, selectedOption, solicitud.SolicitudID) }}>Agregar</button>
                                         }
 
                                     </div>
@@ -153,6 +181,7 @@ const Revision = () => {
                 </div>
             })
         }
+
 
 
     </div>
