@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../homepage.css";
 import Header from "../header";
 import { useEffect, useState } from "react";
+import { Buffer } from 'buffer';
 import { RUTA_BACKEND } from "../../conf";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
@@ -11,6 +12,7 @@ const Revision = () => {
     const [listadoSolicitud, setListadoSolicitud] = useState([])
     const [listadoContaminante, setListadoContaminante] = useState([])
     const [listadoAnimal, setListadoAnimal] = useState([])
+    const [resolvedImages, setResolvedImages] = useState([]);
 
     const obtenerSolicitud = async (SolicitudID = null) => {
         const ruta = SolicitudID == null ?
@@ -93,9 +95,17 @@ const Revision = () => {
         const resp = await fetch(ruta)
         const data = await resp.json()
         console.log("Animales: ")
-        console.log(data)
+        //console.log(data)
         setListadoAnimal(data)
     }
+
+    async function decodeBase64FromBytea(byteaData) {
+        const bytes = byteaData.data;
+        const uint8Array = new Uint8Array(bytes);
+        const buffer = Buffer.from(uint8Array);
+        const base64String = buffer.toString('base64');
+        return base64String;
+      }
 
     const [selectedOption, setSelectedOption] = useState("");
     const [profundidadInt, setProfundidadInt] = useState(0);
@@ -107,6 +117,20 @@ const Revision = () => {
         obtenerSolicitud()
         obtenerContaminantes()
     }, [])
+
+    useEffect(() => {
+        const resolveImages = async () => {
+          const promises = listadoSolicitud.map((solicitud) =>
+            decodeBase64FromBytea(solicitud.Imagen)
+          );
+    
+          const resolvedImages = await Promise.all(promises);
+          setResolvedImages(resolvedImages);
+        };
+    
+        resolveImages();
+      }, [listadoSolicitud]);
+
     console.log(afectados)
     function aver(event) {
         console.log("Probandoooooo")
@@ -114,13 +138,13 @@ const Revision = () => {
     return <div>
         <Header />
         {
-            listadoSolicitud.map((solicitud) => {
+            listadoSolicitud.map((solicitud, index) => {
+                const base64 = resolvedImages[index];
                 return <div className="m-5 card">
                     <div className="card-body">
                         <h5 className="card-title"> {solicitud.Nombre} </h5>
                         <p className="card-text"> {solicitud.Descripcion} </p>
                         <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropsolicitudCard" onClick={aver}>Revisar</button>
-
                         <div class="modal fade" id="staticBackdropsolicitudCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -128,7 +152,7 @@ const Revision = () => {
                                         <h5 class="modal-title" id="exampleModalLabel">{solicitud.Nombre}</h5>
                                     </div>
                                     <div class="modal-body">
-                                        <div className="mb-3"><img id="imagenDetalle" src={solicitud.Imagen} height="200px"/></div>
+                                        <div className="mb-3"><img id="imagenSolicitud" src={base64 == ""? "../svgs/no-image.svg":`data:image/jpeg;base64,${base64}`}/></div>
                                         <div className="dropdown">
                                             <label for="contaminanteSelect" className="py-2">Contaminante</label>
                                             <select id="contaminanteSelect" className="form-control form-select" value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>

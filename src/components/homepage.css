@@ -170,6 +170,13 @@ body{
     margin-bottom: 50px;
 }
 
+#imagenSolicitud{
+    margin: auto;
+    height: 250px;
+    display: block;
+    padding: 2px
+}
+
 .cuidamarForo{
     text-decoration: solid;
     font-size:170%;
