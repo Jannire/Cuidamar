@@ -128,9 +128,7 @@ const Revision = () => {
                                         <h5 class="modal-title" id="exampleModalLabel">{solicitud.Nombre}</h5>
                                     </div>
                                     <div class="modal-body">
-                                        <div>
-                                            "Imagen"
-                                        </div>
+                                        <div className="mb-3"><img id="imagenDetalle" src={solicitud.Imagen} height="200px"/></div>
                                         <div className="dropdown">
                                             <label for="contaminanteSelect" className="py-2">Contaminante</label>
                                             <select id="contaminanteSelect" className="form-control form-select" value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>

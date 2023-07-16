@@ -37,8 +37,8 @@ const Login = () => {
         const resp = await fetch(`${RUTA_BACKEND}/Login`, {
             method: "POST",
             body: JSON.stringify({
-                Correo: userData.Correo,
-                Password: userData.Password,
+                Correo: correo,
+                Password: password,
                 Usuario_ID: userData.Usuario_ID,
                 Username: userData.Username,
                 Apellido_Paterno: userData.Apellido_Paterno,

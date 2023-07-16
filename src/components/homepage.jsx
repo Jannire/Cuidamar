@@ -143,11 +143,11 @@ const Home = (props) => {
                             <div className="mb-3" id="tituloPez">{`${animal.Nombre} - ${animal.Profundidad}m`}</div>
                             <img id="imgPez"  data-bs-toggle="modal" data-bs-target={`#staticBackdrop${animal.AnimalID}`} src={`${animal.Imagen}`} onClick={()=>{obtenerFavoritos(USUARIO_ID,animal.AnimalID)}}/>
                             
-                            <div class="modal fade" id={`staticBackdrop${animal.AnimalID}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5 mt-1" id="staticBackdropLabel" style={{marginRight:"15px", fontSize:"20px"}}>{`${animal.Nombre}`}</h1>
+                            <div className="modal fade" id={`staticBackdrop${animal.AnimalID}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                <div className="modal-header">
+                                    <h1 className="modal-title fs-5 mt-1" id="staticBackdropLabel" style={{marginRight:"15px", fontSize:"20px"}}>{`${animal.Nombre}`}</h1>
                                     {
                                         (()=>{
                                             if(USUARIO_ID === null){
@@ -163,16 +163,16 @@ const Home = (props) => {
                                         
                                     }
                                     
-                                    <button type="button"data-bs-dismiss="modal" class="btn-close"  aria-label="Close"></button>
+                                    <button type="button"data-bs-dismiss="modal" className="btn-close"  aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div className="modal-body">
                                     <div className="mb-3"><img id="imagenDetalle" src={`${animal.Imagen}`}/></div>
                                     <div style={{fontSize:"17px", marginBottom:"10px", marginLeft:"7px", marginRight:"7px"}}><span style={{fontWeight:"bold"}}>Nombre Cientifico: </span>{`${animal.NombreCientifico}`}</div>
                                     <div style={{fontSize:"17px", marginBottom:"10px", marginLeft:"7px", marginRight:"7px"}}><span style={{fontWeight:"bold"}}>Profundidad: </span>{`${animal.Profundidad}m`}</div>
                                     <div style={{fontSize:"17px",fontWeight:"bold", marginLeft:"7px", marginRight:"7px"}}>Descripcion: </div>
                                     <div style={{fontSize:"17px", textAlign:"justify", marginLeft:"7px", marginRight:"7px"}}>{`${animal.Descripcion}`}</div>
                                 </div>
-                                <div class="modal-footer">      
+                                <div className="modal-footer">      
                                 </div>
                                 </div>
                             </div>
