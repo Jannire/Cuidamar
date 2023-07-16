@@ -91,6 +91,21 @@ const ForoDetalle = () => {
         })
         navigate("/ForoMain")
     }
+
+    const eliminarComentarioUnico = async (ComentarioID = null) => {
+        const data = {
+            ComentarioID : ComentarioID
+        }
+        await fetch(`${RUTA_BACKEND}/Comentario?ComentarioID=${ComentarioID}`, {
+            method : "DELETE",
+            body : JSON.stringify(data),
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        })
+        
+    }
+
     useEffect(() => {
         obtenerPost(POSTDETALLE)
         obtenerComentarios(POSTDETALLE)
@@ -175,12 +190,21 @@ const ForoDetalle = () => {
                                 listadoComentarios.map((comentario)=>{
                                     return <div className="row mt-3" style={{background:"rgb(17, 52, 75,0.08)",borderRadius:"10px"}}>
                                         <div className="mt-1"></div>
-                                        {listadoUsuarios.map((usuario)=>{if(usuario.Usuario_ID===comentario.Usuario_ID){
-                                            return <div className="row mb-1" style={{fontSize:"17px", fontWeight:"bold",marginLeft:"1px"}}>
+                                        {
+                                        listadoUsuarios.map((usuario)=>{
+                                            if(usuario.Usuario_ID===comentario.Usuario_ID){
+                                                if(comentario.Usuario_ID === USUARIO_ID){
+                                                    return <div className="row mb-1" style={{fontSize:"17px", fontWeight:"bold",marginLeft:"1px"}}>
+                                                    {`${usuario.Username} - ${comentario.fecha}`}<button className="btn btn-danger" style={{width:"60px",height:"25px", fontSize:"10px",marginLeft:"10px"}} onClick={()=>{eliminarComentarioUnico(comentario.ComentarioID);window.location.reload()}}>Eliminar</button>
+                                                </div>
+                                                }else{
+                                                    return <div className="row mb-1" style={{fontSize:"17px", fontWeight:"bold",marginLeft:"1px"}}>
                                                     {`${usuario.Username} - ${comentario.fecha}`}
                                                 </div>
-                                        }})}
-
+                                                }
+                                            
+                                        }}
+                                        )}
                                         <div className="row mb-1" id="cuerpoComentario" style={{marginLeft:"1px"}}>
                                             {`${comentario.Contenido}`}
                                         </div>
