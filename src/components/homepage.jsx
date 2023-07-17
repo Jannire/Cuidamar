@@ -113,11 +113,11 @@ const Home = (props) => {
             <div className="row">&nbsp;</div>
             <div className="row">&nbsp;</div>
             <div className="row">
-                <div className="col mb-4">Solicita que se muestre tu contaminante aqui!</div>
+                <div className="col mb-4" id="deslizaText">Solicita que se muestre tu contaminante aqui!</div>
             </div>
             <div className="row">
                 <div className="col">
-                    <button onClick={()=>{navigate("/Solicitar")}}>Solicitar</button>
+                    <button className="btn btn-primary" style={{color:"white", fontSize:"20px", width:"150px", fontStyle:"bold"}} onClick={()=>{navigate("/Solicitar")}}>Solicitar</button>
                 </div>
             </div>
             <div className="row">&nbsp;</div>

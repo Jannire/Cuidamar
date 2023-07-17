@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../homepage.css";
 import { RUTA_BACKEND } from "../../conf";
 import { useState } from "react";
@@ -16,7 +16,7 @@ const Solicitar = () => {
 
     const [error, setError] = useState(false);
     const [errortxt, setErrortxt] = useState("");
-
+    const navigate = useNavigate();
     const crearSolicitud = async (nom, desc, img, size) => {
         const data = {
             Nombre: nom,
@@ -121,6 +121,7 @@ const Solicitar = () => {
                                             if (isImage) { // El archivo es una imagen?
                                                 if (ImgSize > 0 && ImgSize <= 1048576) { // La imagen es menor igual a 1MB?
                                                     crearSolicitud(Nombre, Descripcion, Imagen.replace(/^data:image\/\w+;base64,/, '')); // Se crea la solicitud con imagen
+                                                    navigate("/");
                                                 } else {
                                                     setError(true)
                                                     setErrortxt("Solo se aceptan imagenes de 1MB o menos.")
@@ -132,6 +133,7 @@ const Solicitar = () => {
                                             }
                                         } else { // Crea la solicitud sin imagen
                                             crearSolicitud(Nombre, Descripcion, Imagen.replace(/^data:image\/\w+;base64,/, ''));
+                                            navigate("/");
                                         }
                                     }
                                 }
