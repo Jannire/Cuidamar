@@ -121,7 +121,7 @@ const Solicitar = () => {
                                             if (isImage) { // El archivo es una imagen?
                                                 if (ImgSize > 0 && ImgSize <= 1048576) { // La imagen es menor igual a 1MB?
                                                     crearSolicitud(Nombre, Descripcion, Imagen.replace(/^data:image\/\w+;base64,/, '')); // Se crea la solicitud con imagen
-                                                    navigate("/");
+                                                    
                                                 } else {
                                                     setError(true)
                                                     setErrortxt("Solo se aceptan imagenes de 1MB o menos.")
@@ -133,7 +133,7 @@ const Solicitar = () => {
                                             }
                                         } else { // Crea la solicitud sin imagen
                                             crearSolicitud(Nombre, Descripcion, Imagen.replace(/^data:image\/\w+;base64,/, ''));
-                                            navigate("/");
+                                           
                                         }
                                     }
                                 }
