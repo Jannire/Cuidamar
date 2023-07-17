@@ -19,6 +19,7 @@ const Revision = () => {
         const resp = await fetch(ruta)
         const data = await resp.json()
         setListadoSolicitud(data)
+        console.log("Solicitudes")
         console.log(data)
     }
 
@@ -107,9 +108,13 @@ const Revision = () => {
         obtenerSolicitud()
         obtenerContaminantes()
     }, [])
+
+    console.log("Afectados: ")
     console.log(afectados)
-    function aver(event) {
-        console.log("Probandoooooo")
+    
+    function aver(event, a) {
+        console.log("Probandoooooo");
+        console.log(a)
     }
     return <div>
         <Header />
@@ -119,16 +124,19 @@ const Revision = () => {
                     <div className="card-body">
                         <h5 className="card-title"> {solicitud.Nombre} </h5>
                         <p className="card-text"> {solicitud.Descripcion} </p>
-                        <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropsolicitudCard" onClick={aver}>Revisar</button>
+                        <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target={`#staticBackdrop${solicitud.SolicitudID}`} onClick={aver(solicitud.SolicitudID)}>Revisar</button>
 
-                        <div class="modal fade" id="staticBackdropsolicitudCard" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <div class="modal fade" id={`staticBackdrop${solicitud.SolicitudID}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby={`staticBackdrop${solicitud.SolicitudID}`} aria-hidden="true">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">{solicitud.Nombre}</h5>
+                                        <h5 class="modal-title" id={`staticBackdrop${solicitud.SolicitudID}`}>{solicitud.Nombre}</h5>
                                     </div>
                                     <div class="modal-body">
                                         <div className="mb-3"><img id="imagenDetalle" src={solicitud.Imagen} height="200px"/></div>
+                                        <div>
+                                            {solicitud.Descripcion}
+                                        </div>
                                         <div className="dropdown">
                                             <label for="contaminanteSelect" className="py-2">Contaminante</label>
                                             <select id="contaminanteSelect" className="form-control form-select" value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
