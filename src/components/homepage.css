@@ -147,14 +147,21 @@ body{
 }
 
 #tituloPez{
-    font-size: 25px;
+    font-size: 22px;
     color: rgb(0, 56, 73);
     font-weight: bold;
 }
 
+#tituloContaminante{
+    font-size: 22px;
+    color: rgb(187, 22, 22);
+    font-weight: bold;
+    font-style: italic;
+}
+
 #imgPez{
-    height: 150px;
-    margin-bottom: 100px;
+    height: 120px;
+    margin-bottom: 10px;
     
     mix-blend-mode: multiply;
 }
