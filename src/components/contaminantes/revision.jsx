@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../homepage.css";
 import Header from "../header";
 import { useEffect, useState } from "react";
+import { Buffer } from 'buffer';
 import { RUTA_BACKEND } from "../../conf";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
@@ -11,6 +12,7 @@ const Revision = () => {
     const [listadoSolicitud, setListadoSolicitud] = useState([])
     const [listadoContaminante, setListadoContaminante] = useState([])
     const [listadoAnimal, setListadoAnimal] = useState([])
+    const [resolvedImages, setResolvedImages] = useState([]);
 
     const obtenerSolicitud = async (SolicitudID = null) => {
         const ruta = SolicitudID == null ?
@@ -66,7 +68,14 @@ const Revision = () => {
         console.log(resp.status);
         const dataResp = await resp.json()
         obtenerContaminantes()
-        eliminarSolicitud(SolicitudID)
+        await eliminarSolicitud(SolicitudID)
+
+        afectados.map( async (afecta) => {
+            await AgregarAfectados(afecta.value, dataResp.ContaminanteID);
+        })
+
+        setAfectados([])
+        
     }
 
     const modificarContaminante = async (Nombre, ContaminanteID, SolicitudID) => {
@@ -94,9 +103,35 @@ const Revision = () => {
         const resp = await fetch(ruta)
         const data = await resp.json()
         console.log("Animales: ")
-        console.log(data)
+        //console.log(data)
         setListadoAnimal(data)
     }
+
+    const AgregarAfectados = async (AnimalID, ContaminanteID) => {
+        const data = {
+            AnimalID: AnimalID,
+            ContaminanteID: ContaminanteID
+        }
+        const resp = await fetch(`${RUTA_BACKEND}/Afecta`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const dataResp = await resp.json();
+        console.log("HOLA SE HA CREADO ALGO")
+    }
+
+    async function decodeBase64FromBytea(byteaData) {
+        const bytes = byteaData.data;
+        const uint8Array = new Uint8Array(bytes);
+        const buffer = Buffer.from(uint8Array);
+        const base64String = buffer.toString('base64');
+        return base64String;
+    }
+
+
 
     const [selectedOption, setSelectedOption] = useState("");
     const [profundidadInt, setProfundidadInt] = useState(0);
@@ -109,9 +144,21 @@ const Revision = () => {
         obtenerContaminantes()
     }, [])
 
-    console.log("Afectados: ")
+    useEffect(() => {
+        const resolveImages = async () => {
+            const promises = listadoSolicitud.map((solicitud) =>
+                decodeBase64FromBytea(solicitud.Imagen)
+            );
+
+            const resolvedImages = await Promise.all(promises);
+            setResolvedImages(resolvedImages);
+        };
+
+        resolveImages();
+    }, [listadoSolicitud]);
+
     console.log(afectados)
-    
+
     function aver(event, a) {
         console.log("Probandoooooo");
         console.log(a)
@@ -119,7 +166,8 @@ const Revision = () => {
     return <div>
         <Header />
         {
-            listadoSolicitud.map((solicitud) => {
+            listadoSolicitud.map((solicitud, index) => {
+                const base64 = resolvedImages[index];
                 return <div className="m-5 card">
                     <div className="card-body">
                         <h5 className="card-title"> {solicitud.Nombre} </h5>
@@ -133,7 +181,7 @@ const Revision = () => {
                                         <h5 class="modal-title" id={`staticBackdrop${solicitud.SolicitudID}`}>{solicitud.Nombre}</h5>
                                     </div>
                                     <div class="modal-body">
-                                        <div className="mb-3"><img id="imagenDetalle" src={solicitud.Imagen} height="200px"/></div>
+                                        <div className="mb-3"><img id="imagenSolicitud" src={base64 == "" ? "../svgs/no-image.svg" : `data:image/jpeg;base64,${base64}`} /></div>
                                         <div>
                                             {solicitud.Descripcion}
                                         </div>
@@ -158,7 +206,7 @@ const Revision = () => {
                                                 <Select
                                                     isMulti
                                                     name="animalesAfectados"
-                                                    options={listadoAnimal.map(animal => ({value: animal.AnimalID,  label: animal.Nombre}))}
+                                                    options={listadoAnimal.map(animal => ({ value: animal.AnimalID, label: animal.Nombre }))}
                                                     className="basic-multi-select py-2"
                                                     classNamePrefix="select"
                                                     components={animatedComponents}
@@ -170,7 +218,7 @@ const Revision = () => {
                                         }
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {setAfectados([])}}>Cerrar</button>
                                         {
                                             selectedOption == '' ? <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { agregarContaminante(solicitud.Nombre, solicitud.Descripcion, solicitud.Imagen, profundidadInt, 0, solicitud.SolicitudID) }}>Agregar</button>
                                                 : <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { modificarContaminante(solicitud.Nombre, selectedOption, solicitud.SolicitudID) }}>Agregar</button>
