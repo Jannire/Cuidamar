@@ -9,6 +9,18 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 const Revision = () => {
+    let credentials = localStorage.getItem("FULL_CREDENTIALS")
+    const navigate = useNavigate();
+    if(credentials == null){
+        navigate("/")
+    }else{
+        credentials = JSON.parse(credentials)
+        const admin = credentials.admin;
+        if(admin == false){
+            navigate("/")
+        }
+
+    }
     const [listadoSolicitud, setListadoSolicitud] = useState([])
     const [listadoContaminante, setListadoContaminante] = useState([])
     const [listadoAnimal, setListadoAnimal] = useState([])
@@ -70,20 +82,31 @@ const Revision = () => {
         obtenerContaminantes()
         await eliminarSolicitud(SolicitudID)
 
-        afectados.map( async (afecta) => {
+        afectados.map(async (afecta) => {
             await AgregarAfectados(afecta.value, dataResp.ContaminanteID);
         })
 
         setAfectados([])
-        
+
     }
 
-    const modificarContaminante = async (Nombre, ContaminanteID, SolicitudID) => {
+    const modificarContaminante = async (Nombre, ContaminanteID, SolicitudID, Descripcion) => {
         console.log(Nombre);
         console.log(ContaminanteID);
+
+        if(nuevaDescripcion == false){
+            for(let i=0; i<listadoContaminante.length; i++){
+                if(listadoContaminante[i].ContaminanteID == ContaminanteID){
+                    Descripcion = listadoContaminante[i].Descripcion;
+                }
+            }
+        }
+
+        
         const data = {
             Nombre: Nombre,
             ContaminanteID: ContaminanteID,
+            Descripcion: Descripcion
         }
         const resp = await fetch(`${RUTA_BACKEND}/Contaminante`, {
             method: "PUT",
@@ -120,7 +143,6 @@ const Revision = () => {
             }
         })
         const dataResp = await resp.json();
-        console.log("HOLA SE HA CREADO ALGO")
     }
 
     async function decodeBase64FromBytea(byteaData) {
@@ -131,10 +153,10 @@ const Revision = () => {
         return base64String;
     }
 
-
-
     const [selectedOption, setSelectedOption] = useState("");
-    const [profundidadInt, setProfundidadInt] = useState(0);
+    const [nuevaDescripcion, setnuevaDescripcion] = useState(false);
+    const [profundidadInt, setProfundidadInt] = useState(1);
+    
     const [afectados, setAfectados] = useState([]);
     const animatedComponents = makeAnimated();
 
@@ -142,6 +164,7 @@ const Revision = () => {
         obtenerAnimal()
         obtenerSolicitud()
         obtenerContaminantes()
+        
     }, [])
 
     useEffect(() => {
@@ -163,8 +186,20 @@ const Revision = () => {
         console.log("Probandoooooo");
         console.log(a)
     }
+
+    function validarProfundidad(intProf) {
+        if (intProf <= 0) {
+            return 1;
+        }
+        if (intProf > 500) {
+            return 500;
+        }
+        return intProf;
+    }
+
     return <div>
         <Header />
+        
         {
             listadoSolicitud.map((solicitud, index) => {
                 const base64 = resolvedImages[index];
@@ -201,7 +236,7 @@ const Revision = () => {
                                         {
                                             selectedOption == '' ? <div className="py-3">
                                                 Profundidad
-                                                <input min="0" max="1000000" type="number" value={profundidadInt} onChange={e => setProfundidadInt(e.target.value)} className="my-2 form-control" placeholder="Profundidad" />
+                                                <input min="1" max="500" type="number" value={profundidadInt} onChange={e => setProfundidadInt(validarProfundidad(e.target.value))} className="my-2 form-control" placeholder="Profundidad" />
                                                 <label> Animales afectados </label>
                                                 <Select
                                                     isMulti
@@ -216,29 +251,39 @@ const Revision = () => {
                                                 />
                                             </div> : null
                                         }
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {setAfectados([])}}>Cerrar</button>
                                         {
-                                            selectedOption == '' ? <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { agregarContaminante(solicitud.Nombre, solicitud.Descripcion, base64, profundidadInt, 0, solicitud.SolicitudID) }}>Agregar</button>
-                                                : <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { modificarContaminante(solicitud.Nombre, selectedOption, solicitud.SolicitudID) }}>Agregar</button>
+                                            selectedOption != '' ? <> 
+                                                <div className="form-check my-3">
+                                                    <input className="form-check-input" type="checkbox" value={nuevaDescripcion} onChange={(e) => setnuevaDescripcion(e.target.value)} id="flexCheckDefault"/> 
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Utilizar nueva descripcion
+                                                    </label>
+                                                </div>
+                                            </> : null
                                         }
+                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => { setAfectados([]) }}>Cerrar</button>
+                                            {
+                                                selectedOption == '' ? <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { agregarContaminante(solicitud.Nombre, solicitud.Descripcion, base64, profundidadInt, 0, solicitud.SolicitudID) }}>Agregar</button>
+                                                    : <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { modificarContaminante(solicitud.Nombre, selectedOption, solicitud.SolicitudID, solicitud.Descripcion) }}>Agregar</button>
+                                            }
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <button type="button" className="mx-2 btn btn-danger" onClick={() => { eliminarSolicitud(solicitud.SolicitudID) }}>Eliminar</button>
                         </div>
 
-                        <button type="button" className="mx-2 btn btn-danger" onClick={() => { eliminarSolicitud(solicitud.SolicitudID) }}>Eliminar</button>
                     </div>
-
-                </div>
             })
         }
 
 
 
-    </div>
-}
+                </div>
+            }
 
 export default Revision;
