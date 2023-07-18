@@ -166,6 +166,15 @@ body{
     mix-blend-mode: multiply;
 }
 
+#imgContaminante{
+    height: 120px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-style: groove;
+    border-width: 5px;
+    border-color: #9c1a1a;
+}
+
 .modal-body{
     text-align: left;
 }
