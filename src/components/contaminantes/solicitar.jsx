@@ -60,6 +60,7 @@ const Solicitar = () => {
     const handleImageChange = async (e) => {
         const file = e.target.files;
         if (file.length > 0) {
+            setUpload(true);
             const type = file[0].type;
             if (type.includes("image")) { // Si es de tipo imagen
                 setIsImage(true);
@@ -74,6 +75,7 @@ const Solicitar = () => {
                 setImagen("");
             }
         } else {
+            setUpload(false);
             e.target.files = prevTarget;
         }
     }
