@@ -17,12 +17,11 @@ const Solicitar = () => {
     const [error, setError] = useState(false);
     const [errortxt, setErrortxt] = useState("");
     const navigate = useNavigate();
-    const crearSolicitud = async (nom, desc, img, size) => {
+    const crearSolicitud = async (nom, desc, img) => {
         const data = {
             Nombre: nom,
             Descripcion: desc,
-            Imagen: img,
-            ImgSize: size
+            Imagen: img
         }
 
         const resp = await fetch(`${RUTA_BACKEND}/enviarSolicitud`, {
